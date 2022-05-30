@@ -1,5 +1,15 @@
 {
   "dependencies": {
+    "com.squeakywheel.common.components": {
+      "version": "file:F:/Projects/MarnelCityscaperTrial/Submodules/Common/UnityProject/Assets/Common.Components",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {
+        "com.squeakywheel.common.swarm": "1.0.0",
+        "com.squeakywheel.common.core": "1.0.0",
+        "com.unity.mathematics": "1.0.1"
+      }
+    },
     "com.squeakywheel.common.core": {
       "version": "file:F:/Projects/MarnelCityscaperTrial/Submodules/Common/UnityProject/Assets/CommonCore",
       "depth": 0,
@@ -7,6 +17,18 @@
       "dependencies": {
         "com.unity.mathematics": "1.0.1"
       }
+    },
+    "com.squeakywheel.common.swarm": {
+      "version": "file:F:/Projects/MarnelCityscaperTrial/Submodules/Common/UnityProject/Assets/SwarmObjectManager",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
+    "com.squeakywheel.common.unitythreading": {
+      "version": "file:F:/Projects/MarnelCityscaperTrial/Submodules/Common/UnityProject/Assets/UnityThreading",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
     },
     "com.unity.collab-proxy": {
       "version": "1.15.15",

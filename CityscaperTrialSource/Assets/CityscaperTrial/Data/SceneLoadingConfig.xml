@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This is a scene configuration data setup that let's us load different loding profiles -->
+<!-- For example, we can load a version that gets to the game immediately for testing purposes or load the version that has the main menu screen -->
+<SceneLoadingSystem>
+    <LoadProfile id="QuickGame">
+        <SceneSet id="GameSystems"/>
+        <SceneSet id="UI"/>
+        <SceneSet id="HeavyUi"/>
+        <SceneSet id="Dev"/>
+    </LoadProfile>
+    
+    <LoadProfile id="Complete">
+        <SceneSet id="GameSystems"/>
+        <SceneSet id="UI"/>
+    </LoadProfile>
+
+    <SceneSet id="Dev">
+        <Scene name="Debug"/>
+    </SceneSet>
+
+    <SceneSet id="GameSystems">
+        <Scene name="Cameras"/>
+        <Scene name="System"/>
+        <Scene name="Pointer"/>
+        <Scene name="Audio"/>
+    </SceneSet>
+
+    <SceneSet id="UI">
+    </SceneSet>
+
+</SceneLoadingSystem>
