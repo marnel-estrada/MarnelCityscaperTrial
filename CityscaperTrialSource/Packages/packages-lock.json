@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "com.squeakywheel.common.components": {
-      "version": "file:F:/Projects/MarnelCityscaperTrial/Submodules/Common/UnityProject/Assets/Common.Components",
+      "version": "file:../../Submodules/Common/UnityProject/Assets/Common.Components",
       "depth": 0,
       "source": "local",
       "dependencies": {
@@ -11,7 +11,7 @@
       }
     },
     "com.squeakywheel.common.core": {
-      "version": "file:F:/Projects/MarnelCityscaperTrial/Submodules/Common/UnityProject/Assets/CommonCore",
+      "version": "file:../../Submodules/Common/UnityProject/Assets/CommonCore",
       "depth": 0,
       "source": "local",
       "dependencies": {
@@ -19,13 +19,13 @@
       }
     },
     "com.squeakywheel.common.swarm": {
-      "version": "file:F:/Projects/MarnelCityscaperTrial/Submodules/Common/UnityProject/Assets/SwarmObjectManager",
+      "version": "file:../../Submodules/Common/UnityProject/Assets/SwarmObjectManager",
       "depth": 0,
       "source": "local",
       "dependencies": {}
     },
     "com.squeakywheel.common.unitythreading": {
-      "version": "file:F:/Projects/MarnelCityscaperTrial/Submodules/Common/UnityProject/Assets/UnityThreading",
+      "version": "file:../../Submodules/Common/UnityProject/Assets/UnityThreading",
       "depth": 0,
       "source": "local",
       "dependencies": {}
