@@ -58,3 +58,7 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+CityscaperTrialSource/Library/
+CityscaperTrialSource/Temp/
+CityscaperTrialSource/UserSettings/
+CityscaperTrialSource/Logs/
