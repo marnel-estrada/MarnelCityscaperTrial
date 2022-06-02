@@ -1,4 +1,5 @@
 using Common;
+using Common.Signal;
 
 using UnityEngine;
 
@@ -46,16 +47,21 @@ namespace Game {
                 // A new object is selected. We deselect the current one first
                 this.currentSelectedObject.Match(new DeselectMatcher());
                     
-                // Set new current selected object
-                selectableObject.Select();
+                // Set new current selected object and select it
+                selectableObject.ShowOutline();
                 this.currentSelectedObject = Option<SelectableObject>.Some(selectableObject);
-                GameSignals.OPEN_CONTRIBUTIONS_PANEL.Dispatch();
+                
+                // Dispatch the signal that opens the contributions panel
+                Signal signal = GameSignals.OPEN_CONTRIBUTIONS_PANEL;
+                signal.ClearParameters();
+                signal.AddParameter(Params.OBJECT_ID, selectableObject.Id);
+                signal.Dispatch();
             }
         }
         
         private readonly struct DeselectMatcher : IOptionMatcher<SelectableObject> {
             public void OnSome(SelectableObject selectableObject) {
-                selectableObject.Deselect();
+                selectableObject.HideOutline();
             }
 
             public void OnNone() {
