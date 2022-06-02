@@ -33,6 +33,7 @@ namespace Game {
                     // Clear current selection and move on.
                     this.currentSelectedObject.Match(new DeselectMatcher());
                     this.currentSelectedObject = Option<SelectableObject>.NONE;
+                    GameSignals.CLOSE_CONTRIBUTIONS_PANEL.Dispatch();
                     return;
                 }
                     
@@ -48,6 +49,7 @@ namespace Game {
                 // Set new current selected object
                 selectableObject.Select();
                 this.currentSelectedObject = Option<SelectableObject>.Some(selectableObject);
+                GameSignals.OPEN_CONTRIBUTIONS_PANEL.Dispatch();
             }
         }
         

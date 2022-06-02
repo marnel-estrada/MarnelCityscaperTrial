@@ -25,6 +25,7 @@
     </SceneSet>
 
     <SceneSet id="UI">
+        <Scene name="Contributions"/>
     </SceneSet>
 
 </SceneLoadingSystem>
