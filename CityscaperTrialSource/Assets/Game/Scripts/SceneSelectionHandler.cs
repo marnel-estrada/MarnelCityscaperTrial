@@ -22,6 +22,11 @@ namespace Game {
 
         private void Update() {
             if (Input.GetMouseButtonDown(LEFT_MOUSE_BUTTON)) {
+                if (GameQueries.IS_ON_UI_OBJECT.Execute()) {
+                    // It's on UI. Do not proceed.
+                    return;
+                }
+                
                 Ray ray = this.referenceCamera.ScreenPointToRay(Input.mousePosition);
                 if (!Physics.Raycast(ray, out RaycastHit hit, 100)) {
                     // Didn't hit anything
