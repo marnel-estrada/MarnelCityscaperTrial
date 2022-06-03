@@ -60,6 +60,7 @@ namespace Game {
                 Signal signal = GameSignals.OPEN_CONTRIBUTIONS_PANEL;
                 signal.ClearParameters();
                 signal.AddParameter(Params.OBJECT_ID, selectableObject.Id);
+                signal.AddParameter(Params.CONTRIBUTION_SET, selectableObject.GetRequiredComponent<ContributionSet>());
                 signal.Dispatch();
             }
         }

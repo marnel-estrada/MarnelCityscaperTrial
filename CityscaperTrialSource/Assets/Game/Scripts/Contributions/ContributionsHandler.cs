@@ -10,6 +10,8 @@ namespace Game {
         [SerializeField]
         private TMP_Text headerLabel;
 
+        private Option<ContributionSet> currentContributionSet;
+
         protected override void Awake() {
             base.Awake();
             
@@ -22,6 +24,9 @@ namespace Game {
             Option<string> objectId = parameters.GetParameter<string>(Params.OBJECT_ID);
             Assertion.IsSome(objectId);
             objectId.Match(new SetHeaderLabelMatcher(this.headerLabel));
+
+            this.currentContributionSet = parameters.GetParameter<ContributionSet>(Params.CONTRIBUTION_SET);
+            Assertion.IsSome(this.currentContributionSet);
         }
         
         private readonly struct SetHeaderLabelMatcher : IOptionMatcher<string> {
