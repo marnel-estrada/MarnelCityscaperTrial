@@ -8,7 +8,6 @@ namespace Game {
     public class Contribution {
         private readonly string id;
         private readonly DateTime timestamp; // The actual timestamp so we can sort them
-        private readonly string dateCreated;
         private readonly string belongToProject;
         private readonly string author;
 
@@ -42,9 +41,9 @@ namespace Game {
 
         private bool dipasLocated;
 
-        public Contribution(string id, string dateCreated, string belongToProject, string author) {
+        public Contribution(string id, DateTime timestamp, string belongToProject, string author) {
             this.id = id;
-            this.dateCreated = dateCreated;
+            this.timestamp = timestamp;
             this.belongToProject = belongToProject;
             this.author = author;
         }
@@ -57,7 +56,7 @@ namespace Game {
 
         public string DateCreated {
             get {
-                return this.dateCreated;
+                return this.timestamp.ToLongDateString();
             }
         }
 
