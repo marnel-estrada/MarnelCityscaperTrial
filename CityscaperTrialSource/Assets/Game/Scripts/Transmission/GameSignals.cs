@@ -7,11 +7,17 @@ namespace Game {
     public static class GameSignals {
         public static readonly Signal OPEN_CONTRIBUTIONS_PANEL = new Signal("OpenContributionsPanel");
         public static readonly Signal CLOSE_CONTRIBUTIONS_PANEL = new Signal("CloseContributionsPanel");
+        
+        public static readonly Signal OPEN_NEW_CONTRIBUTIONS_PANEL = new Signal("OpenNewContributionsPanel");
+        public static readonly Signal CLOSE_NEW_CONTRIBUTIONS_PANEL = new Signal("CloseNewContributionsPanel");
 
         // Only add those signals that needs string mapping
         private static void PopulateStringToSignalMapping() {
             AddStringMapping(OPEN_CONTRIBUTIONS_PANEL);
             AddStringMapping(CLOSE_CONTRIBUTIONS_PANEL);
+            
+            AddStringMapping(OPEN_NEW_CONTRIBUTIONS_PANEL);
+            AddStringMapping(CLOSE_NEW_CONTRIBUTIONS_PANEL);
         }
 
         private static void AddStringMapping(Signal signal) {

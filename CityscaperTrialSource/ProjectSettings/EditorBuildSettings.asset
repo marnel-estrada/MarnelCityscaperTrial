@@ -21,6 +21,9 @@ EditorBuildSettings:
     path: Assets/PolygonCity/Scenes/Demo.unity
     guid: 35299a6a99d6dfe4bb709527ba95aab0
   - enabled: 1
-    path: Assets/Game/Scenes/Contributions.unity
+    path: Assets/Game/Scenes/UI/Contributions.unity
     guid: fd62283fc19f2c94291c3d96392b9738
+  - enabled: 1
+    path: Assets/Game/Scenes/UI/NewContribution.unity
+    guid: 1b01e16369a3dd5469f1142c097ac4c5
   m_configObjects: {}

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace Game {
@@ -6,6 +7,7 @@ namespace Game {
     /// </summary>
     public class Contribution {
         private readonly string id;
+        private readonly DateTime timestamp; // The actual timestamp so we can sort them
         private readonly string dateCreated;
         private readonly string belongToProject;
         private readonly string author;
