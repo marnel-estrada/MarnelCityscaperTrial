@@ -12,5 +12,11 @@ namespace Game {
         public void Add(Contribution contribution) {
             this.contributions.Add(contribution);
         }
+
+        public IEnumerable<Contribution> Contributions {
+            get {
+                return this.contributions;
+            }
+        }
     }
 }
