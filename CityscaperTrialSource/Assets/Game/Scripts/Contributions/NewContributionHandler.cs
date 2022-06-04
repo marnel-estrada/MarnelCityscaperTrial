@@ -21,15 +21,23 @@ namespace Game {
             Assertion.NotNull(this.contentInput);
         }
 
+        private const string MODAL_HEADER = "Add New Contribution";
+
         /// <summary>
         /// Adds the new contribution. Used as a button action.
         /// </summary>
         public void Add() {
             string title = this.titleInput.text;
-            // TODO Check that the title is not empty
+            if (string.IsNullOrWhiteSpace(title)) {
+                ModalMessageHandler.Open(MODAL_HEADER, "The contribution title can't be empty.");
+                return;
+            }
 
             string content = this.contentInput.text;
-            // TODO Check that the content is not empty
+            if (string.IsNullOrWhiteSpace(content)) {
+                ModalMessageHandler.Open(MODAL_HEADER, "The contribution content can't be empty.");
+                return;
+            }
 
             int selectedContributionTypeIndex = this.contributionTypeDropdown.value;
             ContributionType contributionType = ContributionType.ConvertFromIndex(selectedContributionTypeIndex);
