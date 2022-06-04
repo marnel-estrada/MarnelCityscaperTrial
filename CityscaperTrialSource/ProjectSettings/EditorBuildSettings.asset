@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Game/Scenes/UI/NewContribution.unity
     guid: 1b01e16369a3dd5469f1142c097ac4c5
+  - enabled: 1
+    path: Assets/Game/Scenes/UI/ModalPrompts.unity
+    guid: 4fb8ea236d56f8e4aa38d9e8e18d162a
   m_configObjects: {}

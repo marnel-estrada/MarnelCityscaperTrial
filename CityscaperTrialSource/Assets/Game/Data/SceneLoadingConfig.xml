@@ -27,6 +27,7 @@
     <SceneSet id="UI">
         <Scene name="Contributions"/>
         <Scene name="NewContribution"/>
+        <Scene name="ModalPrompts"/>
     </SceneSet>
 
 </SceneLoadingSystem>

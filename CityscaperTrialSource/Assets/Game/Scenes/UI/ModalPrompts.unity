@@ -3151,9 +3151,8 @@ GameObject:
   - component: {fileID: 2061669974}
   - component: {fileID: 2061669973}
   - component: {fileID: 2061669972}
-  - component: {fileID: 2061669975}
   m_Layer: 0
-  m_Name: Handler
+  m_Name: ModalMessageHandler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3215,21 +3214,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da0a147d83ce7f24e9a37a9ae435f4a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2061669975
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2061669970}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73dec1b15d7d4939a92b0cdad8b843f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  titleInput: {fileID: 521469837}
-  contributionTypeDropdown: {fileID: 264262185}
-  contentInput: {fileID: 1858088090}
 --- !u!1 &2120242537
 GameObject:
   m_ObjectHideFlags: 0
@@ -3602,7 +3586,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2061669975}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Game.NewContributionHandler, Assembly-CSharp
         m_MethodName: Add
         m_Mode: 1

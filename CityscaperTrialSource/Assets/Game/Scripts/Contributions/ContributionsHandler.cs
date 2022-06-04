@@ -18,6 +18,8 @@ namespace Game {
             Assertion.NotNull(this.headerLabel);
             
             AddSignalListener(GameSignals.OPEN_CONTRIBUTIONS_PANEL, OnOpen);
+            
+            GameSignals.ADD_NEW_CONTRIBUTION.AddListener(AddContribution);
         }
 
         private void OnOpen(ISignalParameters parameters) {
@@ -42,6 +44,11 @@ namespace Game {
 
             public void OnNone() {
             }
+        }
+
+        private void AddContribution(AddNewContribution param) {
+            Assertion.IsSome(this.currentContributionSet);
+            Debug.Log($"Add Contribution: {param.title}");
         }
     }
 }
