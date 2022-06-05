@@ -26,9 +26,6 @@ namespace Game {
         private string category;
         private string subCategory;
 
-        private int votingPro;
-        private int votingContra;
-
         private string keywordSuggested;
         private string keywordPicked;
 
@@ -43,6 +40,7 @@ namespace Game {
             this.author = author;
         }
 
+        [Persist]
         public string BelongToProject {
             get {
                 return this.belongToProject;
@@ -53,6 +51,7 @@ namespace Game {
             }
         }
 
+        [Persist]
         public string Author {
             get {
                 return this.author;
@@ -72,6 +71,7 @@ namespace Game {
             }
         }
 
+        [Persist]
         public string Title {
             get {
                 return this.title;
@@ -81,6 +81,7 @@ namespace Game {
             }
         }
 
+        [Persist]
         public float Latitude {
             get {
                 return this.latitude;
@@ -90,6 +91,7 @@ namespace Game {
             }
         }
 
+        [Persist]
         public float Longitude {
             get {
                 return this.longitude;
@@ -99,6 +101,7 @@ namespace Game {
             }
         }
 
+        [Persist]
         public ContributionType ContributionType {
             get {
                 return this.contributionType;
@@ -108,6 +111,7 @@ namespace Game {
             }
         }
 
+        [Persist]
         public string ContributionContent {
             get {
                 return this.contributionContent;
@@ -117,6 +121,7 @@ namespace Game {
             }
         }
 
+        [Persist]
         public Status Status {
             get {
                 return this.status;
@@ -147,24 +152,6 @@ namespace Game {
             }
             set {
                 this.subCategory = value;
-            }
-        }
-
-        public int VotingPro {
-            get {
-                return this.votingPro;
-            }
-            set {
-                this.votingPro = value;
-            }
-        }
-
-        public int VotingContra {
-            get {
-                return this.votingContra;
-            }
-            set {
-                this.votingContra = value;
             }
         }
 

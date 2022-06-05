@@ -13,9 +13,6 @@ namespace Game {
         private float longitude;
 
         private string attachment;
-        
-        private int votingPro;
-        private int votingContra;
 
         private string commentOnContribution;
         private string commentOnComment;
@@ -57,24 +54,7 @@ namespace Game {
             }
         }
 
-        public int VotingPro {
-            get {
-                return this.votingPro;
-            }
-            set {
-                this.votingPro = value;
-            }
-        }
-
-        public int VotingContra {
-            get {
-                return this.votingContra;
-            }
-            set {
-                this.votingContra = value;
-            }
-        }
-
+        [Persist]
         public string CommentOnContribution {
             get {
                 return this.commentOnContribution;
@@ -84,6 +64,7 @@ namespace Game {
             }
         }
 
+        [Persist]
         public string CommentOnComment {
             get {
                 return this.commentOnComment;

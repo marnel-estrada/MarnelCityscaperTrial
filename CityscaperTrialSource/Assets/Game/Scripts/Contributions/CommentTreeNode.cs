@@ -10,14 +10,17 @@ namespace Game {
     public class CommentTreeNode {
         private readonly Option<CommentTreeNode> parent; // The parent of the node
         
-        private readonly string id;
-        private readonly DateTime timestamp;
+        private string id;
+        private DateTime timestamp;
 
         private readonly List<CommentTreeNode> children = new List<CommentTreeNode>(0);
         
         private string title;
         private string commentContent;
         private ContributionType contributionType;
+        
+        private int votingPro;
+        private int votingContra;
 
         public CommentTreeNode(Option<CommentTreeNode> parent, string id, DateTime timestamp) {
             this.parent = parent;
@@ -43,9 +46,14 @@ namespace Game {
             }
         }
         
+        [Persist]
         public string ID {
             get {
                 return this.id;
+            }
+
+            set {
+                this.id = value;
             }
         }
 
@@ -55,6 +63,7 @@ namespace Game {
             }
         }
 
+        [Persist]
         public string Title {
             get {
                 return this.title;
@@ -64,6 +73,7 @@ namespace Game {
             }
         }
 
+        [Persist]
         public string CommentContent {
             get {
                 return this.commentContent;
@@ -73,6 +83,7 @@ namespace Game {
             }
         }
 
+        [Persist]
         public ContributionType ContributionType {
             get {
                 return this.contributionType;
@@ -92,6 +103,36 @@ namespace Game {
                 }
 
                 return depth;
+            }
+        }
+
+        [Persist]
+        public DateTime Timestamp {
+            get {
+                return this.timestamp;
+            }
+            set {
+                this.timestamp = value;
+            }
+        }
+
+        [Persist]
+        public int VotingPro {
+            get {
+                return this.votingPro;
+            }
+            set {
+                this.votingPro = value;
+            }
+        }
+
+        [Persist]
+        public int VotingContra {
+            get {
+                return this.votingContra;
+            }
+            set {
+                this.votingContra = value;
             }
         }
     }
