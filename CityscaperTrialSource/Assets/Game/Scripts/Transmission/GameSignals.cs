@@ -13,6 +13,9 @@ namespace Game {
 
         public static readonly Signal OPEN_MODAL_MESSAGE = new Signal("OpenModalMessage");
         public static readonly Signal CLOSE_MODAL_MESSAGE = new Signal("CloseModalMessage");
+        
+        public static readonly Signal OPEN_CONTRIBUTION_DETAIL = new Signal("OpenContributionDetail");
+        public static readonly Signal CLOSE_CONTRIBUTION_DETAIL = new Signal("CloseContributionDetail");
 
         public static readonly TypedSignal<AddNewContribution> ADD_NEW_CONTRIBUTION =
             new TypedSignal<AddNewContribution>();
@@ -27,6 +30,9 @@ namespace Game {
             
             AddStringMapping(OPEN_MODAL_MESSAGE);
             AddStringMapping(CLOSE_MODAL_MESSAGE);
+            
+            AddStringMapping(OPEN_CONTRIBUTION_DETAIL);
+            AddStringMapping(CLOSE_CONTRIBUTION_DETAIL);
         }
 
         private static void AddStringMapping(Signal signal) {

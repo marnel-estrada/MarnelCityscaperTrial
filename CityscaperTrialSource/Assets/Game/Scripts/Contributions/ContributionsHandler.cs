@@ -107,7 +107,7 @@ namespace Game {
             rowTransform.SetAsFirstSibling();
 
             ContributionEntryRow row = go.GetRequiredComponent<ContributionEntryRow>();
-            row.Init(contribution.Title, contribution.ContributionContent);
+            row.Init(contribution);
             
             // Manage
             this.rowMap[contribution.ID] = row;

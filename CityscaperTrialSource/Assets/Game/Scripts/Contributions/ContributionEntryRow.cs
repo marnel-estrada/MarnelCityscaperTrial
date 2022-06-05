@@ -1,4 +1,5 @@
 using Common;
+using Common.Signal;
 
 using TMPro;
 
@@ -15,6 +16,8 @@ namespace Game {
 
         private SwarmItem swarmItem;
 
+        private Option<Contribution> contribution;
+
         private void Awake() {
             Assertion.NotNull(this.titleLabel);
             Assertion.NotNull(this.contentLabel);
@@ -22,13 +25,32 @@ namespace Game {
             this.swarmItem = this.GetRequiredComponent<SwarmItem>();
         }
 
-        public void Init(string title, string content) {
-            this.titleLabel.text = title;
-            this.contentLabel.text = content;
+        public void Init(Contribution contribution) {
+            this.contribution = Option<Contribution>.Some(contribution);
+            
+            this.titleLabel.text = contribution.Title;
+            this.contentLabel.text = contribution.ContributionContent;
         }
 
         public void Recycle() {
             this.swarmItem.Recycle();
+        }
+
+        public Contribution Contribution {
+            get {
+                Assertion.IsSome(this.contribution);
+                return this.contribution.ValueOrError();
+            }
+        }
+
+        /// <summary>
+        /// Used as a button action
+        /// </summary>
+        public void ShowDetails() {
+            Signal signal = GameSignals.OPEN_CONTRIBUTION_DETAIL;
+            signal.ClearParameters();
+            signal.AddParameter(Params.CONTRIBUTION, this.Contribution);
+            signal.Dispatch();
         }
     }
 }

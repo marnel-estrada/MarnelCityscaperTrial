@@ -28,6 +28,7 @@
         <Scene name="Contributions"/>
         <Scene name="NewContribution"/>
         <Scene name="ModalPrompts"/>
+        <Scene name="ContributionDetail"/>
     </SceneSet>
 
 </SceneLoadingSystem>
