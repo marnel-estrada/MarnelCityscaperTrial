@@ -1,10 +1,10 @@
-using System.Collections.Generic;
+using Common;
 
 namespace Game {
     /// <summary>
     /// The comment data
     /// </summary>
-    public class Comment {
+    public class Comment : CommentTreeNode {
         private readonly string id;
         private readonly string dateCreated;
 
@@ -26,9 +26,15 @@ namespace Game {
         private string commentOnContribution;
         private string commentOnComment;
 
-        private readonly List<Comment> commentedBy = new List<Comment>();
-
         private string customAttribute;
+
+        /// <summary>
+        /// Constructor with specified parent
+        /// Every comment has a parent node whether a contribution or another comment.
+        /// </summary>
+        /// <param name="parent"></param>
+        public Comment(CommentTreeNode parent, string id, string dateCreated) : base(Option<CommentTreeNode>.Some(parent)) {
+        }
 
         public string ID {
             get {
@@ -132,10 +138,6 @@ namespace Game {
             }
         }
 
-        public void AddComment(Comment comment) {
-            this.commentedBy.Add(comment);
-        }
-
         public string CustomAttribute {
             get {
                 return this.customAttribute;
@@ -143,11 +145,6 @@ namespace Game {
             set {
                 this.customAttribute = value;
             }
-        }
-
-        public Comment(string id, string dateCreated) {
-            this.id = id;
-            this.dateCreated = dateCreated;
         }
 
         public string Link {

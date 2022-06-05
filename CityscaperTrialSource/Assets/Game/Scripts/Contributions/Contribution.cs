@@ -1,11 +1,12 @@
 using System;
-using System.Collections.Generic;
+
+using Common;
 
 namespace Game {
     /// <summary>
     /// The contribution data
     /// </summary>
-    public class Contribution {
+    public class Contribution : CommentTreeNode {
         private readonly string id;
         private readonly DateTime timestamp; // The actual timestamp so we can sort them
         private readonly string belongToProject;
@@ -37,11 +38,9 @@ namespace Game {
 
         private string customAttribute;
 
-        private readonly List<Comment> commentedBy = new List<Comment>();
-
         private bool dipasLocated;
 
-        public Contribution(string id, DateTime timestamp, string belongToProject, string author) {
+        public Contribution(string id, DateTime timestamp, string belongToProject, string author) : base(Option<CommentTreeNode>.NONE) {
             this.id = id;
             this.timestamp = timestamp;
             this.belongToProject = belongToProject;
@@ -137,7 +136,7 @@ namespace Game {
 
         public int CommentsNumber {
             get {
-                return this.commentedBy.Count;
+                return this.ChildrenCount;
             }
         }
 
@@ -220,10 +219,6 @@ namespace Game {
             set {
                 this.dipasLocated = value;
             }
-        }
-        
-        public void AddComment(Comment comment) {
-            this.commentedBy.Add(comment);
         }
     }
 }
