@@ -1,3 +1,5 @@
+using System;
+
 using Common;
 
 namespace Game {
@@ -5,20 +7,12 @@ namespace Game {
     /// The comment data
     /// </summary>
     public class Comment : CommentTreeNode {
-        private readonly string id;
-        private readonly string dateCreated;
-
         private string link;
-        private string title;
         
         private float latitude;
         private float longitude;
 
         private string attachment;
-
-        private ContributionType contributionType;
-
-        private string commentContent;
         
         private int votingPro;
         private int votingContra;
@@ -33,28 +27,7 @@ namespace Game {
         /// Every comment has a parent node whether a contribution or another comment.
         /// </summary>
         /// <param name="parent"></param>
-        public Comment(CommentTreeNode parent, string id, string dateCreated) : base(Option<CommentTreeNode>.Some(parent)) {
-        }
-
-        public string ID {
-            get {
-                return this.id;
-            }
-        }
-
-        public string DateCreated {
-            get {
-                return this.dateCreated;
-            }
-        }
-
-        public string Title {
-            get {
-                return this.title;
-            }
-            set {
-                this.title = value;
-            }
+        public Comment(CommentTreeNode parent, string id, DateTime timestamp) : base(Option<CommentTreeNode>.Some(parent), id, timestamp) {
         }
 
         public float Latitude {
@@ -81,24 +54,6 @@ namespace Game {
             }
             set {
                 this.attachment = value;
-            }
-        }
-
-        public ContributionType ContributionType {
-            get {
-                return this.contributionType;
-            }
-            set {
-                this.contributionType = value;
-            }
-        }
-
-        public string CommentContent {
-            get {
-                return this.commentContent;
-            }
-            set {
-                this.commentContent = value;
             }
         }
 

@@ -39,7 +39,10 @@ namespace Game {
                     // Clear current selection and move on.
                     this.currentSelectedObject.Match(new DeselectMatcher());
                     this.currentSelectedObject = Option<SelectableObject>.NONE;
+                    
                     GameSignals.CLOSE_CONTRIBUTIONS_PANEL.Dispatch();
+                    GameSignals.CLOSE_CONTRIBUTION_DETAIL.Dispatch();
+                    
                     return;
                 }
                     

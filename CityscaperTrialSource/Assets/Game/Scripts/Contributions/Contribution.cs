@@ -7,8 +7,6 @@ namespace Game {
     /// The contribution data
     /// </summary>
     public class Contribution : CommentTreeNode {
-        private readonly string id;
-        private readonly DateTime timestamp; // The actual timestamp so we can sort them
         private readonly string belongToProject;
         private readonly string author;
 
@@ -40,23 +38,9 @@ namespace Game {
 
         private bool dipasLocated;
 
-        public Contribution(string id, DateTime timestamp, string belongToProject, string author) : base(Option<CommentTreeNode>.NONE) {
-            this.id = id;
-            this.timestamp = timestamp;
+        public Contribution(string id, DateTime timestamp, string belongToProject, string author) : base(Option<CommentTreeNode>.NONE, id, timestamp) {
             this.belongToProject = belongToProject;
             this.author = author;
-        }
-        
-        public string ID {
-            get {
-                return this.id;
-            }
-        }
-
-        public string DateCreated {
-            get {
-                return this.timestamp.ToLongDateString();
-            }
         }
 
         public string BelongToProject {
