@@ -51,7 +51,7 @@ namespace Game {
 
         public string DateCreated {
             get {
-                return this.timestamp.ToLongTimeString();
+                return this.timestamp.ToLongDateString() + " " + this.timestamp.ToLongTimeString();
             }
         }
 
