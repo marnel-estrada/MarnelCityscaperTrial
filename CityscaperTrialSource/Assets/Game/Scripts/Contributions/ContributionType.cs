@@ -1,3 +1,7 @@
+using System;
+
+using Common;
+
 namespace Game {
     /// <summary>
     /// Struct enum for the different contribution types
@@ -15,6 +19,16 @@ namespace Game {
 
         public static ContributionType ConvertFromIndex(int index) {
             return ALL[index];
+        }
+
+        public static ContributionType ConvertFromId(string id) {
+            for (int i = 0; i < ALL.Length; ++i) {
+                if (ALL[i].id.EqualsFast(id)) {
+                    return ALL[i];
+                }
+            }
+
+            throw new Exception($"Can;t convert '{id}' to ContributionType");
         }
         
         public readonly string id;

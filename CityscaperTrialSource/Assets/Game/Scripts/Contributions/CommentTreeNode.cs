@@ -81,5 +81,18 @@ namespace Game {
                 this.contributionType = value;
             }
         }
+
+        public int Depth {
+            get {
+                Option<CommentTreeNode> current = Option<CommentTreeNode>.Some(this);
+                int depth = 0;
+                while (current.IsSome) {
+                    ++depth;
+                    current = current.ValueOrError().parent;
+                }
+
+                return depth;
+            }
+        }
     }
 }

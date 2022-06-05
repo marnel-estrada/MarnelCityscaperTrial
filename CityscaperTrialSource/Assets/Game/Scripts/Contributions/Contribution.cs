@@ -7,8 +7,8 @@ namespace Game {
     /// The contribution data
     /// </summary>
     public class Contribution : CommentTreeNode {
-        private readonly string belongToProject;
-        private readonly string author;
+        private string belongToProject;
+        private string author;
 
         private string link;
 
@@ -47,11 +47,19 @@ namespace Game {
             get {
                 return this.belongToProject;
             }
+
+            set {
+                this.belongToProject = value;
+            }
         }
 
         public string Author {
             get {
                 return this.author;
+            }
+
+            set {
+                this.author = value;
             }
         }
 
