@@ -36,12 +36,12 @@ namespace Game {
             this.attributeLoaderMap[typeof(bool)] = LoadBool;
             this.attributeLoaderMap[typeof(ulong)] = LoadULong;
             this.attributeLoaderMap[typeof(long)] = LoadULong;
+            this.attributeLoaderMap[typeof(ContributionType)] = LoadContributionType;
+            this.attributeLoaderMap[typeof(DateTime)] = LoadDateTime;
 
             this.elementLoaderMap[typeof(Vector3)] = LoadVector3;
             this.elementLoaderMap[typeof(Color)] = LoadColor;
             this.elementLoaderMap[typeof(int[])] = LoadIntArray;
-
-            this.elementLoaderMap[typeof(ContributionType)] = LoadContributionType;
         }
 
         public void Load(SimpleXmlNode node, object instance) {
@@ -227,6 +227,16 @@ namespace Game {
             string contributionTypeId = node.GetAttribute(property.Name);
             ContributionType value = ContributionType.ConvertFromId(contributionTypeId);
             property.GetSetMethod().Invoke(instance, new object[] {value});
+        }
+        
+        private static void LoadDateTime(SimpleXmlNode node, PropertyInfo property, object instance) {
+            if (!node.HasAttribute(property.Name)) {
+                SetDefault(property, instance);
+                return;
+            }
+
+            long ticks = node.GetAttributeAsLong(property.Name);
+            property.GetSetMethod().Invoke(instance, new object[] { new DateTime(ticks) });
         }
     }
 }

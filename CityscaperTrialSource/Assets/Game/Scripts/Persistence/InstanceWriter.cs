@@ -38,12 +38,12 @@ namespace Game {
             this.attributeWriterMap[typeof(bool)] = WriteAsAttribute;
             this.attributeWriterMap[typeof(ulong)] = WriteAsAttribute;
             this.attributeWriterMap[typeof(long)] = WriteAsAttribute;
+            this.attributeWriterMap[typeof(ContributionType)] = WriteContributionType;
+            this.attributeWriterMap[typeof(DateTime)] = WriteDateTime;
 
             this.elementWriterMap[typeof(Vector3)] = WriteVector3;
             this.elementWriterMap[typeof(Color)] = WriteColor;
             this.elementWriterMap[typeof(int[])] = WriteIntArray;
-            
-            this.elementWriterMap[typeof(ContributionType)] = WriteContributionType;
         }
 
         private readonly SimpleList<PropertyInfo> requiresElementWriterProperties = new SimpleList<PropertyInfo>();
@@ -162,6 +162,11 @@ namespace Game {
         private static void WriteFloat(XmlWriter writer, PropertyInfo property, object instance) {
             float value = (float) property.GetGetMethod().Invoke(instance, null);
             writer.SafeWriteAttributeString(property.Name, value.ToString(NumberFormatInfo.InvariantInfo));
+        }
+
+        private static void WriteDateTime(XmlWriter writer, PropertyInfo property, object instance) {
+            DateTime value = (DateTime)property.GetGetMethod().Invoke(instance, null);
+            writer.SafeWriteAttributeString(property.Name, value.Ticks.ToString());
         }
 
         private static void WriteVector3(XmlWriter writer, PropertyInfo property, object instance) {
