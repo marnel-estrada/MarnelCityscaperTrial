@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Xml;
 
@@ -45,11 +46,7 @@ namespace Game {
                     ContributionSet[] contributionSets = FindObjectsOfType<ContributionSet>();
                     for (int i = 0; i < contributionSets.Length; ++i) {
                         ContributionSet contributionSet = contributionSets[i];
-                        SelectableObject selectableObject = contributionSet.GetRequiredComponent<SelectableObject>();
-
-                        writer.WriteStartElement("ContributionSet");
-                        writer.SafeWriteAttributeString("id", selectableObject.Id);
-                        writer.WriteEndElement();
+                        Write(writer, contributionSet);
                     }
 
                     writer.WriteEndElement();
@@ -58,6 +55,54 @@ namespace Game {
             }
 
             Debug.Log("Saved to " + this.saveFilePath);
+        }
+
+        private readonly InstanceWriter contributionWriter = new InstanceWriter(typeof(Contribution)); 
+
+        private void Write(XmlWriter writer, ContributionSet contributionSet) {
+            SelectableObject selectableObject = contributionSet.GetRequiredComponent<SelectableObject>();
+
+            writer.WriteStartElement("ContributionSet");
+            writer.SafeWriteAttributeString("id", selectableObject.Id);
+            
+            // Write each contribution and its comment tree
+            IEnumerable<Contribution> contributions = contributionSet.Contributions;
+            foreach (Contribution contribution in contributions) {
+                this.contributionWriter.Start(writer);
+                this.contributionWriter.WriteProperties(writer, contribution);
+                
+                // Write child comments
+                IEnumerable<CommentTreeNode> children = contribution.Children;
+                foreach (CommentTreeNode childNode in children) {
+                    Write(writer, childNode);
+                }
+                
+                this.contributionWriter.End(writer);
+            }
+            
+            writer.WriteEndElement();
+        }
+
+        private readonly InstanceWriter commentWriter = new InstanceWriter(typeof(Comment));
+
+        private void Write(XmlWriter writer, CommentTreeNode commentNode) {
+            // Allow comments only
+            Comment comment = commentNode as Comment;
+            if (comment == null) {
+                // Not a comment
+                return;
+            }
+            
+            this.commentWriter.Start(writer);
+            this.commentWriter.WriteProperties(writer, comment);
+            
+            // Write children
+            IEnumerable<CommentTreeNode> children = comment.Children;
+            foreach (CommentTreeNode childNode in children) {
+                Write(writer, childNode);
+            }
+            
+            this.commentWriter.End(writer);
         }
     }
 }
