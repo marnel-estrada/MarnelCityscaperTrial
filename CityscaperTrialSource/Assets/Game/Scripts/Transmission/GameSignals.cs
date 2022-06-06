@@ -25,6 +25,9 @@ namespace Game {
         // This is dispatched when user closes the Contributions panel
         public static readonly Signal DESELECT_CURRENT_SELECTION = new Signal("DeselectCurrentSelection");
 
+        public static readonly Signal OPEN_COMMENT_TREE_PANEL = new Signal("OpenCommentTreePanel");
+        public static readonly Signal CLOSE_COMMENT_TREE_PANEL = new Signal("CloseCommentTreePanel");
+
         // Only add those signals that needs string mapping
         private static void PopulateStringToSignalMapping() {
             AddStringMapping(OPEN_CONTRIBUTIONS_PANEL);
@@ -42,6 +45,9 @@ namespace Game {
             AddStringMapping(SAVE_THEN_CLOSE);
             
             AddStringMapping(DESELECT_CURRENT_SELECTION);
+            
+            AddStringMapping(OPEN_COMMENT_TREE_PANEL);
+            AddStringMapping(CLOSE_COMMENT_TREE_PANEL);
         }
 
         private static void AddStringMapping(Signal signal) {

@@ -87,7 +87,7 @@ namespace Game {
 
             IEnumerable<CommentTreeNode> comments = contribution.Children;
             foreach (CommentTreeNode comment in comments) {
-                GenerateCommentEntry(comment);
+                GenerateCommentEntry(contribution, comment);
             }
         }
 
@@ -122,14 +122,14 @@ namespace Game {
             
             contribution.AddChild(newComment);
 
-            GenerateCommentEntry(newComment);
+            GenerateCommentEntry(contribution, newComment);
             
             // Clear the input fields
             this.newCommentTitleInput.text = string.Empty;
             this.newCommentContentInput.text = string.Empty;
         }
 
-        private void GenerateCommentEntry(CommentTreeNode comment) {
+        private void GenerateCommentEntry(Contribution contribution, CommentTreeNode comment) {
             GameObject go = this.pool.Request("CommentEntry");
             Transform goTransform = go.transform;
             goTransform.SetParent(this.commentsRoot);
@@ -137,7 +137,7 @@ namespace Game {
             goTransform.SetSiblingIndex(this.transformBeforeButtons.GetSiblingIndex() + 1);
 
             CommentEntry entry = go.GetRequiredComponent<CommentEntry>();
-            entry.Init(comment);
+            entry.Init(contribution, comment);
 
             // Manage
             this.commentEntries.Add(entry);

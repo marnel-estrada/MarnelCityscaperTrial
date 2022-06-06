@@ -535,7 +535,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96031ced7b2c4b9fa5f7bc10f0072adc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  signalToDispatch: CloseNewContributionsPanel
+  signalToDispatch: CloseCommentTreePanel
 --- !u!1 &1049049647
 GameObject:
   m_ObjectHideFlags: 0
@@ -1268,7 +1268,7 @@ GameObject:
   - component: {fileID: 1943682097}
   - component: {fileID: 1943682096}
   m_Layer: 5
-  m_Name: ContributionsPanel
+  m_Name: CommentTreePanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1477,8 +1477,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panelHandler: {fileID: 2061669973}
-  openSignal: OpenContributionsPanel
-  closeSignal: CloseContributionsPanel
+  openSignal: OpenCommentTreePanel
+  closeSignal: CloseCommentTreePanel
 --- !u!114 &2061669973
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1491,7 +1491,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4cd0778a36c46e3880d0d193b9df954, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rootView: {fileID: 1943682092}
+  rootView: {fileID: 2120242537}
   inputLayerName: 
   hiddenByDefault: 1
 --- !u!114 &2061669974
@@ -1519,6 +1519,8 @@ GameObject:
   - component: {fileID: 2120242539}
   - component: {fileID: 2120242538}
   - component: {fileID: 2120242542}
+  - component: {fileID: 2120242544}
+  - component: {fileID: 2120242543}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1622,6 +1624,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvas: {fileID: 2120242540}
   cameraName: UiCamera
+--- !u!114 &2120242543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2120242537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.8}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &2120242544
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2120242537}
+  m_CullTransparentMesh: 1
 --- !u!1 &465744780601679787
 GameObject:
   m_ObjectHideFlags: 0
@@ -2009,7 +2049,6 @@ GameObject:
   - component: {fileID: 1962780981781248190}
   - component: {fileID: 1962780981781248189}
   - component: {fileID: 3501298521689516227}
-  - component: {fileID: 3704378482790013914}
   m_Layer: 5
   m_Name: CommentTreeEntry
   m_TagString: Untagged
@@ -2106,22 +2145,6 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
---- !u!114 &3704378482790013914
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1962780981781248128}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 301558e1aa2e49bda86e7d815aa3c4cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timestampLabel: {fileID: 1962780980640474571}
-  titleLabel: {fileID: 1020787995015703140}
-  contentLabel: {fileID: 6209998056380897601}
-  seeMoreCommentsButtonLabel: {fileID: 0}
 --- !u!224 &3948854535256828730
 RectTransform:
   m_ObjectHideFlags: 0

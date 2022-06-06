@@ -1,4 +1,5 @@
 using Common;
+using Common.Signal;
 
 using TMPro;
 
@@ -21,6 +22,7 @@ namespace Game {
 
         private SwarmItem swarmItem;
 
+        private Option<Contribution> contribution;
         private Option<CommentTreeNode> commentNode;
 
         private void Awake() {
@@ -32,7 +34,8 @@ namespace Game {
             this.swarmItem = this.GetRequiredComponent<SwarmItem>();
         }
 
-        public void Init(CommentTreeNode comment) {
+        public void Init(Contribution contribution, CommentTreeNode comment) {
+            this.contribution = Option<Contribution>.Some(contribution);
             this.commentNode = Option<CommentTreeNode>.Some(comment);
             
             // Update display
@@ -47,6 +50,18 @@ namespace Game {
         public void Recycle() {
             this.swarmItem.Recycle();
             this.commentNode = Option<CommentTreeNode>.NONE;
+        }
+
+        // Used as a button action
+        public void OpenCommentTree() {
+            Assertion.IsSome(this.contribution);
+            Assertion.IsSome(this.commentNode);
+            
+            Signal signal = GameSignals.OPEN_COMMENT_TREE_PANEL;
+            signal.ClearParameters();
+            signal.AddParameter(Params.CONTRIBUTION, this.contribution.ValueOrError());
+            signal.AddParameter(Params.COMMENT_NODE, this.commentNode.ValueOrError());
+            signal.Dispatch();
         }
     }
 }

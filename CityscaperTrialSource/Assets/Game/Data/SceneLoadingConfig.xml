@@ -30,6 +30,7 @@
         <Scene name="ModalPrompts"/>
         <Scene name="ContributionDetail"/>
         <Scene name="Hud"/>
+        <Scene name="CommentTreePanel"/>
     </SceneSet>
 
 </SceneLoadingSystem>

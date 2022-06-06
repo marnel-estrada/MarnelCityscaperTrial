@@ -7,5 +7,7 @@ namespace Game {
         public const string BODY = "Body";
 
         public const string CONTRIBUTION = "Contribution";
+        
+        public const string COMMENT_NODE = "CommentNode";
     }
 }
