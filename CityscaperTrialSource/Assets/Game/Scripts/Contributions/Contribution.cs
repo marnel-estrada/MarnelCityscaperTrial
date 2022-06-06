@@ -35,6 +35,9 @@ namespace Game {
 
         private bool dipasLocated;
 
+        public Contribution() : base(Option<CommentTreeNode>.NONE) {
+        }
+
         public Contribution(string id, DateTime timestamp, string belongToProject, string author) : base(Option<CommentTreeNode>.NONE, id, timestamp) {
             this.belongToProject = belongToProject;
             this.author = author;

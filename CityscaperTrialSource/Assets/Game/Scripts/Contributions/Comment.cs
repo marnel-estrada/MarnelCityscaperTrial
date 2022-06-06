@@ -21,6 +21,13 @@ namespace Game {
 
         /// <summary>
         /// Constructor with specified parent
+        /// </summary>
+        /// <param name="parent"></param>
+        public Comment(CommentTreeNode parent) : base(Option<CommentTreeNode>.Some(parent)) {
+        }
+
+        /// <summary>
+        /// Constructor with specified parent
         /// Every comment has a parent node whether a contribution or another comment.
         /// </summary>
         /// <param name="parent"></param>

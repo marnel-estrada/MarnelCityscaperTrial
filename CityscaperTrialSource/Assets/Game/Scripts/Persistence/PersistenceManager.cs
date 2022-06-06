@@ -1,10 +1,12 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml;
 
 using Common;
 using Common.Signal;
+using Common.Xml;
 
 using UnityEngine;
 
@@ -18,6 +20,10 @@ namespace Game {
             this.saveFilePath = Path.Combine(Application.persistentDataPath, "Contributions.xml");
             
             AddSignalListener(GameSignals.SAVE_THEN_CLOSE, SaveThenClose);
+        }
+
+        private void Start() {
+            StartCoroutine(LoadContributions());
         }
 
         private void SaveThenClose(ISignalParameters parameters) {
@@ -103,6 +109,101 @@ namespace Game {
             }
             
             this.commentWriter.End(writer);
+        }
+
+        private readonly Dictionary<string, ContributionSet> contributionSetMap =
+            new Dictionary<string, ContributionSet>();
+
+        private IEnumerator LoadContributions() {
+            yield return null;
+
+            if (!File.Exists(this.saveFilePath)) {
+                // Save file was not yet generated
+                yield break;
+            }
+            
+            // Populate contributionSetMap
+            PopulateContributionSetMap();
+
+            SimpleXmlNode root = SimpleXmlReader.Read(File.ReadAllText(this.saveFilePath)).FindFirstNodeInChildren("Root");
+            IReadOnlyList<SimpleXmlNode> rootChildren = root.Children;
+            for (int i = 0; i < rootChildren.Count; ++i) {
+                SimpleXmlNode childNode = rootChildren[i];
+                if (nameof(ContributionSet).EqualsFast(childNode.tagName)) {
+                    LoadContributionSet(childNode);
+                }
+            }
+            
+            Debug.Log("Loaded contributions.");
+        }
+
+        private void PopulateContributionSetMap() {
+            this.contributionSetMap.Clear();
+
+            ContributionSet[] contributionSets = FindObjectsOfType<ContributionSet>();
+            for (int i = 0; i < contributionSets.Length; ++i) {
+                ContributionSet contributionSet = contributionSets[i];
+                SelectableObject selectableObject = contributionSet.GetRequiredComponent<SelectableObject>();
+                this.contributionSetMap[selectableObject.Id] = contributionSet;
+            }
+        }
+
+        private const string CONTRIBUTION_SET_ID = "id";
+
+        private void LoadContributionSet(SimpleXmlNode contributionSetNode) {
+            string contributionSetId = contributionSetNode.GetAttribute(CONTRIBUTION_SET_ID);
+            Assertion.NotEmpty(contributionSetId);
+
+            ContributionSet contributionSet = this.contributionSetMap[contributionSetId];
+
+            IReadOnlyList<SimpleXmlNode> children = contributionSetNode.Children;
+            for (int i = 0; i < children.Count; ++i) {
+                SimpleXmlNode childNode = children[i];
+                if (nameof(Contribution).EqualsFast(childNode.tagName)) {
+                    // It's a contribution node. Let's load then add.
+                    contributionSet.Add(LoadContribution(childNode));
+                }
+            }
+        }
+
+        private readonly InstanceLoader contributionLoader = new InstanceLoader(typeof(Contribution));
+
+        private Contribution LoadContribution(SimpleXmlNode contributionNode) {
+            Contribution contribution = new Contribution();
+            this.contributionLoader.Load(contributionNode, contribution);
+            Assertion.NotEmpty(contribution.ID);
+            
+            // Load child comments
+            IReadOnlyList<SimpleXmlNode> children = contributionNode.Children;
+            for (int i = 0; i < children.Count; ++i) {
+                SimpleXmlNode childNode = children[i];
+                if (nameof(Comment).EqualsFast(childNode.tagName)) {
+                    // It's a comment. We load it and add.
+                    contribution.AddChild(LoadComment(childNode, contribution));
+                }
+            }
+
+            return contribution;
+        }
+
+        private readonly InstanceLoader commentLoader = new InstanceLoader(typeof(Comment));
+
+        private Comment LoadComment(SimpleXmlNode commentNode, CommentTreeNode parent) {
+            Comment comment = new Comment(parent);
+            this.commentLoader.Load(commentNode, comment);
+            Assertion.NotEmpty(comment.ID);
+            
+            // Load child comments
+            IReadOnlyList<SimpleXmlNode> children = commentNode.Children;
+            for (int i = 0; i < children.Count; ++i) {
+                SimpleXmlNode childNode = children[i];
+                if (nameof(Comment).EqualsFast(childNode.tagName)) {
+                    // It's a comment. We load it and add.
+                    comment.AddChild(LoadComment(childNode, comment));
+                }
+            }
+
+            return comment;
         }
     }
 }

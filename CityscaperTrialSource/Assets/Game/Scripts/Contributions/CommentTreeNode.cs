@@ -22,8 +22,11 @@ namespace Game {
         private int votingPro;
         private int votingContra;
 
-        public CommentTreeNode(Option<CommentTreeNode> parent, string id, DateTime timestamp) {
+        public CommentTreeNode(Option<CommentTreeNode> parent) {
             this.parent = parent;
+        }
+
+        public CommentTreeNode(Option<CommentTreeNode> parent, string id, DateTime timestamp) : this(parent) {
             this.id = id;
             this.timestamp = timestamp;
         }
