@@ -32,4 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Game/Scenes/UI/ContributionDetail.unity
     guid: ddcad7b1d4b47ee42b4f6e67e678390c
+  - enabled: 1
+    path: Assets/Game/Scenes/UI/Hud.unity
+    guid: 88d2530c343b7034abd9c3cc12fcf802
   m_configObjects: {}

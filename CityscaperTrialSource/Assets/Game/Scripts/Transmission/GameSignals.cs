@@ -20,6 +20,8 @@ namespace Game {
         public static readonly TypedSignal<AddNewContribution> ADD_NEW_CONTRIBUTION =
             new TypedSignal<AddNewContribution>();
 
+        public static readonly Signal SAVE_THEN_CLOSE = new Signal("SaveThenClose");
+
         // Only add those signals that needs string mapping
         private static void PopulateStringToSignalMapping() {
             AddStringMapping(OPEN_CONTRIBUTIONS_PANEL);
@@ -33,6 +35,8 @@ namespace Game {
             
             AddStringMapping(OPEN_CONTRIBUTION_DETAIL);
             AddStringMapping(CLOSE_CONTRIBUTION_DETAIL);
+            
+            AddStringMapping(SAVE_THEN_CLOSE);
         }
 
         private static void AddStringMapping(Signal signal) {
