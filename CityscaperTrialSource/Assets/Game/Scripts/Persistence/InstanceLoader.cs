@@ -36,8 +36,9 @@ namespace Game {
             this.attributeLoaderMap[typeof(bool)] = LoadBool;
             this.attributeLoaderMap[typeof(ulong)] = LoadULong;
             this.attributeLoaderMap[typeof(long)] = LoadULong;
-            this.attributeLoaderMap[typeof(ContributionType)] = LoadContributionType;
             this.attributeLoaderMap[typeof(DateTime)] = LoadDateTime;
+            this.attributeLoaderMap[typeof(ContributionType)] = LoadContributionType;
+            this.attributeLoaderMap[typeof(Status)] = LoadStatus;
 
             this.elementLoaderMap[typeof(Vector3)] = LoadVector3;
             this.elementLoaderMap[typeof(Color)] = LoadColor;
@@ -227,6 +228,18 @@ namespace Game {
             string contributionTypeId = node.GetAttribute(property.Name);
             ContributionType value = ContributionType.ConvertFromId(contributionTypeId);
             property.GetSetMethod().Invoke(instance, new object[] {value});
+        }
+
+        private static void LoadStatus(SimpleXmlNode node, PropertyInfo property, object instance) {
+            if (!node.HasAttribute(property.Name)) {
+                // Set the default value if it doesn't exist in XML
+                property.GetSetMethod().Invoke(instance, new object[] { Status.NOT_YET_WORKED_ON });
+                return;
+            }
+
+            byte statusId = node.GetAttributeAsByte(property.Name);
+            Status status = Status.ConvertFromId(statusId);
+            property.GetSetMethod().Invoke(instance, new object[] { status });
         }
         
         private static void LoadDateTime(SimpleXmlNode node, PropertyInfo property, object instance) {

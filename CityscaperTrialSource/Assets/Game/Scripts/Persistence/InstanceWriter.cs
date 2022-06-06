@@ -38,8 +38,9 @@ namespace Game {
             this.attributeWriterMap[typeof(bool)] = WriteAsAttribute;
             this.attributeWriterMap[typeof(ulong)] = WriteAsAttribute;
             this.attributeWriterMap[typeof(long)] = WriteAsAttribute;
-            this.attributeWriterMap[typeof(ContributionType)] = WriteContributionType;
             this.attributeWriterMap[typeof(DateTime)] = WriteDateTime;
+            this.attributeWriterMap[typeof(ContributionType)] = WriteContributionType;
+            this.attributeWriterMap[typeof(Status)] = WriteStatus;
 
             this.elementWriterMap[typeof(Vector3)] = WriteVector3;
             this.elementWriterMap[typeof(Color)] = WriteColor;
@@ -205,6 +206,17 @@ namespace Game {
 
             ContributionType contributionType = (ContributionType)value;
             writer.SafeWriteAttributeString(property.Name, contributionType.id);
+        }
+
+        private static void WriteStatus(XmlWriter writer, PropertyInfo property, object instance) {
+            object value = property.GetGetMethod().Invoke(instance, null);
+            if (value == null) {
+                // No value. No need to write.
+                return;
+            }
+
+            Status status = (Status)value;
+            writer.SafeWriteAttributeString(property.Name, status.id.ToString());
         }
 
         private static void WriteIntArray(XmlWriter writer, PropertyInfo property, object instance) {
