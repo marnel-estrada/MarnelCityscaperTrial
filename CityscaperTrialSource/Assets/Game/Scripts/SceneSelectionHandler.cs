@@ -16,6 +16,8 @@ namespace Game {
             Assertion.NotEmpty(this.referenceCameraName);
 
             this.referenceCamera = UnityUtils.GetRequiredComponent<Camera>(this.referenceCameraName);
+            
+            GameSignals.DESELECT_CURRENT_SELECTION.AddListener(DeselectCurrentSelection);
         }
 
         private const int LEFT_MOUSE_BUTTON = 0;
@@ -37,12 +39,7 @@ namespace Game {
                 if (selectableObject == null) {
                     // Currently selected object is not a selectable object.
                     // Clear current selection and move on.
-                    this.currentSelectedObject.Match(new DeselectMatcher());
-                    this.currentSelectedObject = Option<SelectableObject>.NONE;
-                    
-                    GameSignals.CLOSE_CONTRIBUTIONS_PANEL.Dispatch();
-                    GameSignals.CLOSE_CONTRIBUTION_DETAIL.Dispatch();
-                    
+                    ClearSelection();
                     return;
                 }
                     
@@ -53,7 +50,7 @@ namespace Game {
                 }
                     
                 // A new object is selected. We deselect the current one first
-                this.currentSelectedObject.Match(new DeselectMatcher());
+                this.currentSelectedObject.Match(new HideOutlineMatcher());
                     
                 // Set new current selected object and select it
                 selectableObject.ShowOutline();
@@ -68,7 +65,7 @@ namespace Game {
             }
         }
         
-        private readonly struct DeselectMatcher : IOptionMatcher<SelectableObject> {
+        private readonly struct HideOutlineMatcher : IOptionMatcher<SelectableObject> {
             public void OnSome(SelectableObject selectableObject) {
                 selectableObject.HideOutline();
             }
@@ -76,6 +73,18 @@ namespace Game {
             public void OnNone() {
                 // Do nothing
             }
+        }
+
+        private void DeselectCurrentSelection(ISignalParameters parameters) {
+            ClearSelection();
+        }
+
+        private void ClearSelection() {
+            this.currentSelectedObject.Match(new HideOutlineMatcher());
+            this.currentSelectedObject = Option<SelectableObject>.NONE;
+
+            GameSignals.CLOSE_CONTRIBUTIONS_PANEL.Dispatch();
+            GameSignals.CLOSE_CONTRIBUTION_DETAIL.Dispatch();
         }
     }
 }
