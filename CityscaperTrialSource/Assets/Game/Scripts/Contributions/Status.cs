@@ -14,6 +14,10 @@ namespace Game {
             IN_PROGRESS,
             FINISHED
         };
+
+        public static Status ConvertFromId(byte id) {
+            return ALL[id];
+        }
         
         public readonly byte id;
         public readonly string label;
