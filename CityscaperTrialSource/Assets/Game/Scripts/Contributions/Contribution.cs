@@ -19,8 +19,6 @@ namespace Game {
 
         private ContributionType contributionType;
 
-        private string contributionContent;
-
         private Status status;
 
         private string category;
@@ -114,13 +112,13 @@ namespace Game {
             }
         }
 
-        [Persist]
+        // Note here that we don't persist ContributionContent as it uses CommentContent internally.
         public string ContributionContent {
             get {
-                return this.contributionContent;
+                return this.CommentContent;
             }
             set {
-                this.contributionContent = value;
+                this.CommentContent = value;
             }
         }
 
