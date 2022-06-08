@@ -1,4 +1,5 @@
 using Common;
+using Common.Signal;
 
 using TMPro;
 
@@ -25,6 +26,9 @@ namespace Game {
         
         [SerializeField]
         private TMP_Text downVoteLabel;
+        
+        [SerializeField]
+        private Button commentButton;
 
         private Option<CommentTreeNode> commentNode;
 
@@ -37,6 +41,7 @@ namespace Game {
             Assertion.NotNull(this.contentLabel);
             Assertion.NotNull(this.upVoteLabel);
             Assertion.NotNull(this.downVoteLabel);
+            Assertion.NotNull(this.commentButton);
 
             this.swarmItem = this.GetRequiredComponent<SwarmItem>();
         }
@@ -47,7 +52,7 @@ namespace Game {
             UpdateDisplay();
         }
 
-        private const int WIDTH_SPACE_PER_DEPTH = 10;
+        private const int WIDTH_SPACE_PER_DEPTH = 20;
 
         private void UpdateDisplay() {
             Assertion.IsSome(this.commentNode);
@@ -89,12 +94,29 @@ namespace Game {
         }
 
         // Used as button action
-        public void OpenAddComment() {
+        public void Recycle() {
+            // Always show the button on recycle so it's shown when the instance is activated again
+            ShowCommentButton();
             
+            this.swarmItem.Recycle();
         }
 
-        public void Recycle() {
-            this.swarmItem.Recycle();
+        // Used as button action
+        public void OpenNewCommentPanel() {
+            Assertion.IsSome(this.commentNode);
+            
+            Signal signal = GameSignals.OPEN_NEW_COMMENT_PANEL;
+            signal.ClearParameters();
+            signal.AddParameter(Params.PARENT_COMMENT, this.commentNode.ValueOrError());
+            signal.Dispatch();
+        }
+
+        public void HideCommentButton() {
+            this.commentButton.gameObject.Deactivate();
+        }
+
+        public void ShowCommentButton() {
+            this.commentButton.gameObject.Activate();
         }
     }
 }

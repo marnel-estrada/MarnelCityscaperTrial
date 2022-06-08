@@ -27,6 +27,9 @@ namespace Game {
 
         public static readonly Signal OPEN_COMMENT_TREE_PANEL = new Signal("OpenCommentTreePanel");
         public static readonly Signal CLOSE_COMMENT_TREE_PANEL = new Signal("CloseCommentTreePanel");
+        
+        public static readonly Signal OPEN_NEW_COMMENT_PANEL = new Signal("OpenNewCommentPanel");
+        public static readonly Signal CLOSE_NEW_COMMENT_PANEL = new Signal("CloseNewCommentPanel");
 
         // Only add those signals that needs string mapping
         private static void PopulateStringToSignalMapping() {
@@ -48,6 +51,9 @@ namespace Game {
             
             AddStringMapping(OPEN_COMMENT_TREE_PANEL);
             AddStringMapping(CLOSE_COMMENT_TREE_PANEL);
+            
+            AddStringMapping(OPEN_NEW_COMMENT_PANEL);
+            AddStringMapping(CLOSE_NEW_COMMENT_PANEL);
         }
 
         private static void AddStringMapping(Signal signal) {

@@ -29,7 +29,7 @@ namespace Game {
             
             Option<Contribution> contribution = parameters.GetParameter<Contribution>(Params.CONTRIBUTION);
             Assertion.IsSome(contribution);
-            GenerateEntry(contribution.ValueOrError());
+            GenerateContributionEntry(contribution.ValueOrError());
 
             Option<CommentTreeNode> comment = parameters.GetParameter<CommentTreeNode>(Params.COMMENT_NODE);
             Assertion.IsSome(comment);
@@ -43,11 +43,14 @@ namespace Game {
             this.entries.Clear();
         }
 
-        private void GenerateEntry(CommentTreeNode node) {
+        private void GenerateContributionEntry(CommentTreeNode node) {
             GameObject go = this.pool.Request("CommentTreeEntry");
             
             CommentTreeEntry entry = go.GetRequiredComponent<CommentTreeEntry>();
             entry.Init(node);
+            
+            // We hide the comment button here because direct comments are only added in contribution detail
+            entry.HideCommentButton();
             
             Transform goTransform = go.transform;
             goTransform.SetParent(this.commentsRoot);

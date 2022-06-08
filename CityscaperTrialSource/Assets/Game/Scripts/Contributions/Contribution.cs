@@ -12,8 +12,6 @@ namespace Game {
 
         private string link;
 
-        private string title;
-
         private float latitude;
         private float longitude;
 
@@ -69,16 +67,6 @@ namespace Game {
             }
             set {
                 this.link = value;
-            }
-        }
-
-        [Persist]
-        public string Title {
-            get {
-                return this.title;
-            }
-            set {
-                this.title = value;
             }
         }
 

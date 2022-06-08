@@ -38,4 +38,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Game/Scenes/UI/CommentTreePanel.unity
     guid: 2f419a77a6cec3b49963d90f6067a34c
+  - enabled: 1
+    path: Assets/Game/Scenes/UI/NewComment.unity
+    guid: 11e8a8763d5e10c4c9afa5f9126a8179
   m_configObjects: {}
