@@ -13,7 +13,7 @@ namespace Game {
         [SerializeField]
         private RectTransform commentsRoot;
 
-        private readonly List<CommentTreeEntry> entries = new List<CommentTreeEntry>(); 
+        private readonly Dictionary<CommentTreeNode, CommentTreeEntry> entryMap = new Dictionary<CommentTreeNode, CommentTreeEntry>(); 
         
         protected override void Awake() {
             base.Awake();
@@ -22,6 +22,7 @@ namespace Game {
             Assertion.NotNull(this.commentsRoot);
             
             AddSignalListener(GameSignals.OPEN_COMMENT_TREE_PANEL, OnOpen);
+            AddSignalListener(GameSignals.NEW_COMMENT_ADDED, OnNewCommentAdded);
         }
 
         private void OnOpen(ISignalParameters parameters) {
@@ -37,10 +38,10 @@ namespace Game {
         }
 
         private void Clear() {
-            for (int i = 0; i < this.entries.Count; ++i) {
-                this.entries[i].Recycle();
+            foreach (KeyValuePair<CommentTreeNode,CommentTreeEntry> mapEntry in this.entryMap) {
+                mapEntry.Value.Recycle();
             }    
-            this.entries.Clear();
+            this.entryMap.Clear();
         }
 
         private void GenerateContributionEntry(CommentTreeNode node) {
@@ -57,7 +58,7 @@ namespace Game {
             goTransform.localScale = Vector3.one;
 
             // Manage
-            this.entries.Add(entry);
+            this.entryMap.Add(node, entry);
         }
 
         // Generates the entries of the whole tree
@@ -72,12 +73,39 @@ namespace Game {
             goTransform.localScale = Vector3.one;
 
             // Manage
-            this.entries.Add(entry);
+            this.entryMap.Add(node, entry);
             
             IEnumerable<CommentTreeNode> children = node.Children;
             foreach (CommentTreeNode childNode in children) {
                 GenerateTreeEntries(childNode);
             }
+        }
+
+        private void OnNewCommentAdded(ISignalParameters parameters) {
+            // Create a CommentTreeEntry for the new comment
+            Option<CommentTreeNode> parentCommentOption = parameters.GetParameter<CommentTreeNode>(Params.PARENT_COMMENT);
+            Assertion.IsSome(parentCommentOption);
+
+            Option<CommentTreeNode> newCommentOption = parameters.GetParameter<CommentTreeNode>(Params.NEW_COMMENT);
+            Assertion.IsSome(newCommentOption);
+            
+            GameObject go = this.pool.Request("CommentTreeEntry");
+            
+            CommentTreeEntry entry = go.GetRequiredComponent<CommentTreeEntry>();
+            CommentTreeNode newComment = newCommentOption.ValueOrError();
+            entry.Init(newComment);
+            
+            Transform goTransform = go.transform;
+            goTransform.SetParent(this.commentsRoot);
+            goTransform.localScale = Vector3.one;
+            
+            // Set the new entry next to the parent
+            CommentTreeNode parentComment = parentCommentOption.ValueOrError();
+            CommentTreeEntry parentEntry = this.entryMap[parentComment];
+            goTransform.SetSiblingIndex(parentEntry.transform.GetSiblingIndex() + parentComment.DescendantCount);
+
+            // Manage
+            this.entryMap.Add(newComment, entry);
         }
     }
 }

@@ -138,5 +138,22 @@ namespace Game {
                 this.votingContra = value;
             }
         }
+
+        public int DescendantCount {
+            get {
+                return GetDescendantCount(this);
+            }
+        }
+
+        private static int GetDescendantCount(CommentTreeNode node) {
+            int descendantCount = node.ChildrenCount;
+            
+            // Recurse through children
+            for (int i = 0; i < node.children.Count; ++i) {
+                descendantCount += GetDescendantCount(node.children[i]);
+            }
+
+            return descendantCount;
+        }
     }
 }

@@ -31,6 +31,8 @@ namespace Game {
         public static readonly Signal OPEN_NEW_COMMENT_PANEL = new Signal("OpenNewCommentPanel");
         public static readonly Signal CLOSE_NEW_COMMENT_PANEL = new Signal("CloseNewCommentPanel");
 
+        public static readonly Signal NEW_COMMENT_ADDED = new Signal("NewCommentAdded");
+
         // Only add those signals that needs string mapping
         private static void PopulateStringToSignalMapping() {
             AddStringMapping(OPEN_CONTRIBUTIONS_PANEL);

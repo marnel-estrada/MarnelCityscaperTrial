@@ -2243,6 +2243,7 @@ GameObject:
   - component: {fileID: 2061669974}
   - component: {fileID: 2061669973}
   - component: {fileID: 2061669972}
+  - component: {fileID: 2061669975}
   m_Layer: 0
   m_Name: Handler
   m_TagString: Untagged
@@ -2306,6 +2307,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da0a147d83ce7f24e9a37a9ae435f4a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2061669975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2061669970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7367be6e54694bf4a7dcf327341e1d29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentCommentLabel: {fileID: 5553900086654589877}
+  titleInput: {fileID: 521469837}
+  contributionTypeDropdown: {fileID: 4331082752726807057}
+  contentInput: {fileID: 1858088090}
 --- !u!1 &2120242537
 GameObject:
   m_ObjectHideFlags: 0
@@ -2558,6 +2575,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7f4308f50cc7ce44fb4b7f2923a596fd, type: 3}
+--- !u!114 &4331082752726807057 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4331082752689070137, guid: 7f4308f50cc7ce44fb4b7f2923a596fd, type: 3}
+  m_PrefabInstance: {fileID: 4331082752726807056}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b743370ac3e4ec2a1668f5455a8ef8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4650785406756570497
 GameObject:
   m_ObjectHideFlags: 0
@@ -2775,8 +2803,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Game.NewContributionHandler, Assembly-CSharp
+      - m_Target: {fileID: 2061669975}
+        m_TargetAssemblyTypeName: Game.NewCommentHandler, Assembly-CSharp
         m_MethodName: Add
         m_Mode: 1
         m_Arguments:
@@ -3083,7 +3111,7 @@ GameObject:
   - component: {fileID: 5553900086654589882}
   - component: {fileID: 5553900086654589877}
   m_Layer: 5
-  m_Name: Comment
+  m_Name: ParentComment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

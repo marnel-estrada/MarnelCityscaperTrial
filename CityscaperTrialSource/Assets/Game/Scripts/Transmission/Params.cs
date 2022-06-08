@@ -10,5 +10,6 @@ namespace Game {
         
         public const string COMMENT_NODE = "CommentNode";
         public const string PARENT_COMMENT = "ParentComment";
+        public const string NEW_COMMENT = "NewComment";
     }
 }
