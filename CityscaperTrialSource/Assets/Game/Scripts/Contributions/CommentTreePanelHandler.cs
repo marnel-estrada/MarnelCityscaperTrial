@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 
 using Common;
@@ -13,6 +14,8 @@ namespace Game {
         [SerializeField]
         private RectTransform commentsRoot;
 
+        private float commentsRootOriginalWidth;
+
         private readonly Dictionary<CommentTreeNode, CommentTreeEntry> entryMap = new Dictionary<CommentTreeNode, CommentTreeEntry>(); 
         
         protected override void Awake() {
@@ -23,6 +26,8 @@ namespace Game {
             
             AddSignalListener(GameSignals.OPEN_COMMENT_TREE_PANEL, OnOpen);
             AddSignalListener(GameSignals.NEW_COMMENT_ADDED, OnNewCommentAdded);
+
+            StartCoroutine(ResolveCommentRootOriginalWidth());
         }
 
         private void OnOpen(ISignalParameters parameters) {
@@ -81,6 +86,8 @@ namespace Game {
             }
         }
 
+        private const int COMMENT_TREE_ENTRY_WIDTH = 500;
+
         private void OnNewCommentAdded(ISignalParameters parameters) {
             // Create a CommentTreeEntry for the new comment
             Option<CommentTreeNode> parentCommentOption = parameters.GetParameter<CommentTreeNode>(Params.PARENT_COMMENT);
@@ -106,6 +113,13 @@ namespace Game {
 
             // Manage
             this.entryMap.Add(newComment, entry);
+        }
+
+        private IEnumerator ResolveCommentRootOriginalWidth() {
+            yield return null;
+
+            this.commentsRootOriginalWidth = this.commentsRoot.rect.width;
+            print($"Original width: {this.commentsRootOriginalWidth}");
         }
     }
 }

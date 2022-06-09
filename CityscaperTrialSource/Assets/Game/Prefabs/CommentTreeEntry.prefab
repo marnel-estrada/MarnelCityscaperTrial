@@ -181,7 +181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_IgnoreLayout: 0
-  m_MinWidth: 0
+  m_MinWidth: 800
   m_MinHeight: -1
   m_PreferredWidth: -1
   m_PreferredHeight: -1
@@ -422,9 +422,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_IgnoreLayout: 0
   m_MinWidth: 500
-  m_MinHeight: 105.03
+  m_MinHeight: -1
   m_PreferredWidth: -1
-  m_PreferredHeight: -1
+  m_PreferredHeight: 105.03
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
@@ -999,6 +999,7 @@ GameObject:
   - component: {fileID: 1175397910284682112}
   - component: {fileID: 4316124920075555838}
   - component: {fileID: 5414197150548671266}
+  - component: {fileID: 2371313408413887723}
   m_Layer: 5
   m_Name: CommentTreeEntry
   m_TagString: Untagged
@@ -1040,9 +1041,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_IgnoreLayout: 0
   m_MinWidth: -1
-  m_MinHeight: 105.03
-  m_PreferredWidth: -1
-  m_PreferredHeight: -1
+  m_MinHeight: -1
+  m_PreferredWidth: 1300
+  m_PreferredHeight: 105.03
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
@@ -1094,6 +1095,20 @@ MonoBehaviour:
   upVoteLabel: {fileID: 5071478111204969202}
   downVoteLabel: {fileID: 5071478109962854807}
   commentButton: {fileID: 5376823398191385362}
+--- !u!114 &2371313408413887723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1175397910284682173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e2294efd0ba482ea32caecb07074fd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layoutElement: {fileID: 1175397910284682115}
+  targetRect: {fileID: 824977641857124828}
 --- !u!1 &1175397910747770405
 GameObject:
   m_ObjectHideFlags: 0

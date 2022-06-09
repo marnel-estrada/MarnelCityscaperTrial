@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace Game {
     [ExecuteInEditMode]
-    public class DynamicMinHeightSetter : MonoBehaviour {
+    public class DynamicPreferredWidthSetter : MonoBehaviour {
         [SerializeField]
         private LayoutElement layoutElement;
 
@@ -21,7 +21,7 @@ namespace Game {
                 return;
             }
 
-            this.layoutElement.preferredHeight = this.targetRect.rect.height;
+            this.layoutElement.preferredWidth = this.targetRect.rect.width;
         }
     }
 }
