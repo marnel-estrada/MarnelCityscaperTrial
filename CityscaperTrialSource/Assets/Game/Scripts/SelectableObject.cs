@@ -15,11 +15,11 @@ namespace Game {
         private string id;
 
         private void Awake() {
-            // if (this.outline == null) {
-            //     // Automatically get from own object if it was not specified
-            //     this.outline = this.GetRequiredComponent<Outline>();
-            // }
-            // Assertion.NotNull(this.outline);
+            if (this.outline == null) {
+                // Automatically get from own object if it was not specified
+                this.outline = this.GetRequiredComponent<Outline>();
+            }
+            Assertion.NotNull(this.outline);
             
             // Resolve the ID
             Vector3 position = this.transform.position;
@@ -29,28 +29,16 @@ namespace Game {
         }
 
         public void MarkAsSelected() {
-            if (this.outline == null) {
-                return;
-            }
-            
             this.outline.color = 1;
             this.outline.enabled = true;
         }
 
         public void MarkAsHovered() {
-            if (this.outline == null) {
-                return;
-            }
-            
             this.outline.color = 0;
             this.outline.enabled = true;
         }
 
         public void HideOutline() {
-            if (this.outline == null) {
-                return;
-            }
-            
             this.outline.enabled = false;
         }
         
