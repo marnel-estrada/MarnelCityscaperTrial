@@ -284,7 +284,7 @@ MonoBehaviour:
   lineIntensity: 1
   fillAmount: 0.2
   lineColor0: {r: 1, g: 1, b: 1, a: 1}
-  lineColor1: {r: 0.4470588, g: 0.84333336, b: 1, a: 1}
+  lineColor1: {r: 1, g: 0.7011379, b: 0, a: 1}
   lineColor2: {r: 0, g: 0, b: 1, a: 1}
   additiveRendering: 0
   backfaceCulling: 1
