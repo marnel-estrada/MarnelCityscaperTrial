@@ -155,5 +155,13 @@ namespace Game {
 
             return descendantCount;
         }
+
+        public void UpVote() {
+            ++this.votingPro;
+        }
+
+        public void DownVote() {
+            ++this.votingContra;
+        }
     }
 }

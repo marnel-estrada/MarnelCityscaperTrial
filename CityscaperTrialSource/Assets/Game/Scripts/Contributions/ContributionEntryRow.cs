@@ -14,6 +14,9 @@ namespace Game {
         [SerializeField]
         private TMP_Text contentLabel;
 
+        [SerializeField]
+        private VotingHandler votingHandler;
+
         private SwarmItem swarmItem;
 
         private Option<Contribution> contribution;
@@ -21,6 +24,7 @@ namespace Game {
         private void Awake() {
             Assertion.NotNull(this.titleLabel);
             Assertion.NotNull(this.contentLabel);
+            Assertion.NotNull(this.votingHandler);
 
             this.swarmItem = this.GetRequiredComponent<SwarmItem>();
         }
@@ -30,6 +34,8 @@ namespace Game {
             
             this.titleLabel.text = contribution.Title;
             this.contentLabel.text = contribution.ContributionContent;
+            
+            this.votingHandler.Init(contribution);
         }
 
         public void Recycle() {
