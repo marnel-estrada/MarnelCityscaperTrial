@@ -20,8 +20,14 @@ namespace Game {
             this.id = $"{this.objectName} ({position.x:n2}, {position.y:n2}, {position.z:n2})";
         }
 
-        public void ShowOutline() {
+        public void MarkAsSelected() {
             this.outline.OutlineWidth = 2.0f;
+            this.outline.OutlineColor = Color.cyan;
+        }
+
+        public void MarkAsHovered() {
+            this.outline.OutlineWidth = 2.0f;
+            this.outline.OutlineColor = Color.white;
         }
 
         public void HideOutline() {
