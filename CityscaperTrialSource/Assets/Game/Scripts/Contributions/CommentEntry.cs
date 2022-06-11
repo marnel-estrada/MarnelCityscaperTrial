@@ -20,6 +20,9 @@ namespace Game {
         [SerializeField]
         private TMP_Text seeMoreCommentsButtonLabel;
 
+        [SerializeField]
+        private VotingHandler votingHandler;
+
         private SwarmItem swarmItem;
 
         private Option<Contribution> contribution;
@@ -30,6 +33,7 @@ namespace Game {
             Assertion.NotNull(this.titleLabel);
             Assertion.NotNull(this.contentLabel);
             Assertion.NotNull(this.seeMoreCommentsButtonLabel);
+            Assertion.NotNull(this.votingHandler);
 
             this.swarmItem = this.GetRequiredComponent<SwarmItem>();
         }
@@ -43,8 +47,10 @@ namespace Game {
             this.titleLabel.text = comment.Title;
             this.contentLabel.text = comment.CommentContent;
 
-            string commentCountText = TextUtils.AsCommaSeparated(comment.ChildrenCount);
-            this.seeMoreCommentsButtonLabel.text = $"See more comments ({commentCountText})...";
+            string commentCountText = TextUtils.AsCommaSeparated(comment.DescendantCount);
+            this.seeMoreCommentsButtonLabel.text = $"See comments ({commentCountText})...";
+            
+            this.votingHandler.Init(comment);
         }
 
         public void Recycle() {
