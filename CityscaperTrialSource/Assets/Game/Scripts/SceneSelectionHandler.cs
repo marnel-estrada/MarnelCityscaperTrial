@@ -121,7 +121,7 @@ namespace Game {
             }
 
             // A new object is hovered. We remove the outline of the current one first.
-            this.currentHoveredObject.Match(new HideOutlineMatcher());
+            HideHoveredObjectOutline();
 
             // Set new current hovered object and show the hovered outline
             selectableObject.MarkAsHovered();
@@ -129,12 +129,15 @@ namespace Game {
         }
         
         private void ClearHovered() {
+            HideHoveredObjectOutline();
+            this.currentHoveredObject = Option<SelectableObject>.NONE;
+        }
+
+        private void HideHoveredObjectOutline() {
             if (!this.currentHoveredObject.Equals(this.currentSelectedObject)) {
                 // We don't hide the outline if the hovered object is the currently selected object
                 this.currentHoveredObject.Match(new HideOutlineMatcher());
             }
-            
-            this.currentHoveredObject = Option<SelectableObject>.NONE;
         }
     }
 }
